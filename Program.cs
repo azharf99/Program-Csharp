@@ -8,6 +8,11 @@ class Program{
         BelajarArray.ShowOutput();
         CalculateScore.ShowOutput();
         ExtraCredit.ShowOutput();
+        BooleanCheck.ShowOutput();
+        Blocks.ShowOutput();
+        FizzBuzz.showOutput();
+        HeroMonster.showOutput();
+        PetsApp.showOutput();
     
     }
 }
