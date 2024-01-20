@@ -6,6 +6,7 @@ class PetsApp
     static int menuChoice;
     static int petIDCounter = 1;
     static int maxNumPets = 8;
+    static int numArrMember = 0;
     static string[,] ourAnimals = new string[maxNumPets, 6];
 
     public static void showOutput()
@@ -16,7 +17,12 @@ class PetsApp
             // Display the main menu
             Console.WriteLine("\nMain Menu:");
             Console.WriteLine("1. List all our current pet information.");
-            Console.WriteLine("2. Add new animals.");
+            if (numArrMember == maxNumPets){
+                Console.WriteLine("YOU CANNOT add new animals ANYMORE.");
+                Console.WriteLine($"\nWe currently have {numArrMember} pets that need homes. We can manage {maxNumPets-numArrMember} more.");
+            } else{
+                Console.WriteLine("2. Add new animals.");
+            }
             Console.WriteLine("3. Ensure ages and physical descriptions are complete.");
             Console.WriteLine("4. Ensure nicknames and personality descriptions are complete.");
             Console.WriteLine(@"5. Edit an animal’s age.");
@@ -123,41 +129,49 @@ class PetsApp
     // Function to add new animals to the ourAnimals array
     static void AddNewAnimal()
     {
-        Console.WriteLine("\nAdding a new animal:");
-        for (int i = 0; i < ourAnimals.GetLength(0); i++)
-        {
-            if (ourAnimals[i, 0] == null)
+        if (numArrMember == maxNumPets){
+            Console.WriteLine("YOU CANNOT add new animals ANYMORE.");
+        } 
+        else{
+            Console.WriteLine($"\nWe currently have {numArrMember} pets that need homes. We can manage {maxNumPets-numArrMember} more.");
+            Console.WriteLine("\nAdding a new animal:");
+            for (int i = 0; i < ourAnimals.GetLength(0); i++)
             {
-                // Generate a new pet ID
-                string petID = petIDCounter.ToString();
-                petIDCounter++;
+                if (ourAnimals[i, 0] == null)
+                {
+                    // Generate a new pet ID
+                    string petID = petIDCounter.ToString();
+                    petIDCounter++;
 
-                Console.Write("Enter pet species (dog or cat): ");
-                string? species = Console.ReadLine();
+                    Console.Write("Enter pet species (dog or cat): ");
+                    string? species = Console.ReadLine();
 
-                Console.Write("Enter pet age (years): ");
-                string? age = Console.ReadLine();
+                    Console.Write("Enter pet age (years): ");
+                    string? age = Console.ReadLine();
 
-                Console.Write("Enter physical description: ");
-                string? physical = Console.ReadLine();
+                    Console.Write("Enter physical description: ");
+                    string? physical = Console.ReadLine();
 
-                Console.Write("Enter personality description: ");
-                string? personality = Console.ReadLine();
+                    Console.Write("Enter personality description: ");
+                    string? personality = Console.ReadLine();
 
-                Console.Write("Enter pet nickname: ");
-                string? nickname = Console.ReadLine();
+                    Console.Write("Enter pet nickname: ");
+                    string? nickname = Console.ReadLine();
 
-                // Save data to ourAnimals array
-                ourAnimals[i, 0] = petID;
-                ourAnimals[i, 1] = species is not null ? species : "";
-                ourAnimals[i, 2] = age is not null ? age : "";
-                ourAnimals[i, 3] = physical is not null ? physical : "";
-                ourAnimals[i, 4] = personality is not null ? personality : "";
-                ourAnimals[i, 5] = nickname is not null ? nickname : "";
+                    // Save data to ourAnimals array
+                    ourAnimals[i, 0] = petID;
+                    ourAnimals[i, 1] = species is not null ? species : "";
+                    ourAnimals[i, 2] = age is not null ? age : "";
+                    ourAnimals[i, 3] = physical is not null ? physical : "";
+                    ourAnimals[i, 4] = personality is not null ? personality : "";
+                    ourAnimals[i, 5] = nickname is not null ? nickname : "";
 
-                Console.WriteLine("New animal added successfully!");
-                break;
+                    Console.WriteLine("New animal added successfully!");
+                    break;
+                }
             }
+            numArrMember += 1;
+
         }
     }
 
